@@ -215,6 +215,19 @@ export default function ConvexSignIn() {
     void signIn("google");
   };
 
+  const handleAnonymousSignIn = () => {
+    setError(null);
+    clearVerificationStep();
+    setIsSubmitting(true);
+    void signIn("anonymous")
+      .catch((err: unknown) => {
+        setError(formatPasswordAuthError(err));
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+  };
+
   const handlePasswordAuth = async () => {
     setError(null);
     if (mode === "signUp") {
@@ -626,6 +639,26 @@ export default function ConvexSignIn() {
                 </>
               )}
             </div>
+
+            {!pendingEmail && (
+            <div className="my-4 flex items-center gap-3">
+              <div className="h-px flex-1 bg-slate-200" />
+              <span className="text-xs uppercase tracking-wide text-slate-400">Or</span>
+              <div className="h-px flex-1 bg-slate-200" />
+            </div>
+            )}
+
+            {!pendingEmail && (
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => void handleAnonymousSignIn()}
+              disabled={isSubmitting}
+              className="w-full h-11 border-slate-300 text-slate-800 hover:bg-slate-50"
+            >
+              {isSubmitting ? "Please wait..." : "访客试用（无需登录）"}
+            </Button>
+            )}
 
             {!pendingEmail && (
             <div className="my-4 flex items-center gap-3">

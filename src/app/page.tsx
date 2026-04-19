@@ -40,7 +40,9 @@ export default function HomePage() {
 
   const emailVerified =
     user != null && user.emailVerificationTime !== undefined;
-  const canEnterApp = isAuthenticated && emailVerified;
+  const anonymousOk = user != null && user.isAnonymous === true;
+  const canEnterApp =
+    isAuthenticated && (emailVerified || anonymousOk);
 
   if (isLoading || (isAuthenticated && user === undefined)) {
     return (

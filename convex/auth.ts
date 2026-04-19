@@ -5,6 +5,7 @@ import { query } from "./_generated/server";
 import type { MutationCtx } from "./_generated/server";
 import type { Doc, Id } from "./_generated/dataModel";
 import Google from "@auth/core/providers/google";
+import { Anonymous } from "@convex-dev/auth/providers/Anonymous";
 import { Password } from "@convex-dev/auth/providers/Password";
 import { SendGridOtp } from "./sendgridOtp";
 
@@ -246,6 +247,7 @@ async function uniqueUserWithVerifiedPhone(ctx: MutationCtx, phone: string) {
 
 export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
   providers: [
+    Anonymous(),
     Password({
       verify: SendGridOtp,
       profile: ((params: Record<string, unknown>) => {

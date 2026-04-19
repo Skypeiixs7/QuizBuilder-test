@@ -24,7 +24,9 @@ export default function ConvexUserButton() {
   }
 
   const displayName =
-    user?.username ?? user?.name ?? user?.email ?? "User";
+    user?.isAnonymous === true
+      ? "访客"
+      : (user?.username ?? user?.name ?? user?.email ?? "User");
 
   const adminSuffix =
     user?.role === "admin" ? (
@@ -82,7 +84,9 @@ export default function ConvexUserButton() {
           </div>
 
           <div className="px-2 py-1.5 text-xs text-gray-500">
-            {user.email}
+            {user.isAnonymous === true
+              ? "匿名会话（退出后数据仍保留在服务器）"
+              : user.email}
           </div>
 
           <hr />
