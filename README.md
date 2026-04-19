@@ -104,7 +104,7 @@ AUTH_GOOGLE_SECRET=<your-google-client-secret>
 
 Also add `AUTH_GOOGLE_ID` and `AUTH_GOOGLE_SECRET` in the [Convex Dashboard](https://dashboard.convex.dev) under your project's environment variables.
 
-**Convex Auth JWT keys (required for any sign-in, including anonymous):** if you see `Missing environment variable 'JWT_PRIVATE_KEY'`, run **`npm run convex:auth-keys-apply`** (writes keys to the **same dev deployment** as in `.env.local`; avoids Dashboard paste mistakes and CLI flag parsing issues). Alternatively run `npm run convex:auth-keys` and add **`JWT_PRIVATE_KEY`** and **`JWKS`** in the Dashboard for **this** deployment ([manual](https://labs.convex.dev/auth/setup/manual#configure-private-and-public-key)). For Google OAuth locally: `npx convex env set SITE_URL http://localhost:3010`.
+**Convex Auth JWT keys (required for any sign-in, including anonymous):** if you see `Missing environment variable 'JWT_PRIVATE_KEY'`, run **`npm run convex:auth-keys-apply`** (writes keys to the **dev** deployment from `.env.local`). For **production** (Vercel), run **`npm run convex:auth-keys-apply:prod`** so `JWT_PRIVATE_KEY` and **`JWKS`** stay a matching pair ([manual](https://labs.convex.dev/auth/setup/manual#configure-private-and-public-key)). Do **not** add `JWT_PRIVATE_KEY` / `JWKS` to Vercel. For Google OAuth locally: `npx convex env set SITE_URL http://localhost:3010`. On Convex **Production**, set **`SITE_URL`** to your public site (e.g. `https://your-app.vercel.app`). If you manually added **`CONVEX_SITE_URL`** in the Dashboard and sign-in fails, remove it so the platform default (`*.convex.site`) applies.
 
 ### Email OTP (SendGrid) configuration
 
