@@ -1,0 +1,28 @@
+import "@/styles/globals.css";
+import { GeistSans } from "geist/font/sans";
+import { type Metadata } from "next";
+import { ConvexClientProvider } from "@/components/providers/convex-provider";
+import { Toaster } from "@/components/ui/sonner";
+
+export const metadata: Metadata = {
+  title: "VisionVerse",
+  description: "Create, share, and explore personality quizzes.",
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={GeistSans.variable}>
+      <body>
+        <ConvexClientProvider>
+          <main>{children}</main>
+          <Toaster />
+        </ConvexClientProvider>
+      </body>
+    </html>
+  );
+}
